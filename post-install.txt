@@ -1,0 +1,9 @@
+cp /bootfs/wpa_supplicant.conf /rootfs/etc/wpa_supplicant/
+cp /bootfs/interfaces /rootfs/etc/network/
+chroot /rootfs useradd -m pi -s /bin/bash
+sed -i 's/allowed_users=console/allowed_users=anybody/' /rootfs/etc/X11/Xwrapper.config
+sed -i "s@38400 tty1@-a pi 38400 tty1@" /rootfs/etc/inittab
+cp /bootfs/xsession /rootfs/home/pi/.xsession
+echo "startx" >> /rootfs/home/pi/.bashrc
+cp /bootfs/build_navit.sh /rootfs/usr/src/
+chroot /rootfs /usr/src/build_navit.sh
