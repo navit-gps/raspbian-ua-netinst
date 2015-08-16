@@ -7,4 +7,5 @@ make -j4
 make install
 mkdir /home/pi/.navit/
 cp /usr/local/share/navit/navit.xml /home/pi/.navit/
-sed -i '@gui type="internal" enabled="yes">@gui type="internal" enabled="yes" fullscreen="1">@' /home/pi/.navit/navit.xml
+sed -i 's@gui type="internal" enabled="yes">@gui type="internal" enabled="yes" fullscreen="1">@' /home/pi/.navit/navit.xml
+chown -R pi /home/pi/.navit/
