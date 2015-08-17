@@ -1,1 +1,1 @@
-packages=vim,tmux,wpasupplicant,xserver-xorg,xinit,fluxbo,wireless-tools,x11-xserver-utils,build-essential,cmake,git,librsvg2-bin,libgtk2.0-dev
+packages=vim,tmux,wpasupplicant,xserver-xorg,xinit,fluxbox,wireless-tools,x11-xserver-utils,build-essential,cmake,git,librsvg2-bin,libgtk2.0-dev
