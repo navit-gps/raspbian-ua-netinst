@@ -1,9 +1,12 @@
 cp /bootfs/wpa_supplicant.conf /rootfs/etc/wpa_supplicant/
 cp /bootfs/interfaces /rootfs/etc/network/
-chroot /rootfs useradd -m pi -s /bin/bash
-sed -i 's/allowed_users=console/allowed_users=anybody/' /rootfs/etc/X11/Xwrapper.config
-sed -i "s@38400 tty1@-a pi 38400 tty1@" /rootfs/etc/inittab
-cp /bootfs/xsession /rootfs/home/pi/.xsession
-echo "startx" >> /rootfs/home/pi/.bashrc
+chroot /rootfs useradd -m navit -s /bin/bash
+cp /bootfs/xsession /rootfs/home/navit/.xsession
 cp /bootfs/build_navit.sh /rootfs/usr/src/
 chroot /rootfs /usr/src/build_navit.sh
+# Workaround 'parse_vt_settings: Cannot open /dev/tty0 (Permission denied)'
+chroot /rootfs wget http://snapshot.raspbian.org/201611180446/raspbian/pool/main/x/xorg/x11-common_7.7+16_all.deb -O /tmp/x11-common_7.7+16_all.deb
+chroot /rootfs dpkg -i /tmp/x11-common_7.7+16_all.deb
+chroot /rootfs sed -i -e 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config
+cp /rootfs/boot/navit.service /rootfs/etc/systemd/system/navit.service
+chroot /rootfs systemctl enable navit
