@@ -1,7 +1,12 @@
+# Configure network and wifi
 cp /bootfs/wpa_supplicant.conf /rootfs/etc/wpa_supplicant/
 cp /bootfs/interfaces /rootfs/etc/network/
+
+
+# Create a navit user and activate navit autostart
 chroot /rootfs useradd -m navit -s /bin/bash
-cp /bootfs/xsession /rootfs/home/navit/.xsession
+chroot /rootfs mkdir /home/navit/.fluxbox
+cp /bootfs/startup /rootfs/home/navit/.fluxbox/startup
 cp /bootfs/build_navit.sh /rootfs/usr/src/
 chroot /rootfs /usr/src/build_navit.sh
 # Workaround 'parse_vt_settings: Cannot open /dev/tty0 (Permission denied)'
@@ -10,3 +15,7 @@ chroot /rootfs dpkg -i /tmp/x11-common_7.7+16_all.deb
 chroot /rootfs sed -i -e 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config
 cp /rootfs/boot/navit.service /rootfs/etc/systemd/system/navit.service
 chroot /rootfs systemctl enable navit
+
+# Configure boot options
+chroot /rootfs grep -q -F 'disable_overscan=1' /boot/config.txt || echo 'disable_overscan=1' >> /boot/config.txt
+chroot /rootfs grep -q -F 'disable_splash=1' /boot/config.txt || echo 'disable_splash=1' >> /boot/config.txt
