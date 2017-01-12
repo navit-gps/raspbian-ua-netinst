@@ -1,6 +1,8 @@
 # raspbian-ua-netinst
 Automatically install Navit on a Raspberry Pi
 
+Questions about this? Ask us on IRC! irc://irc.freenode.org/navit or http://webchat.freenode.net/?channels=navit
+
 Example of Navit running on a Raspberry Pi 2 with the Adafruit 3.5" 320x240 Touchscreen
 ![Example](https://github.com/navit-gps/raspbian-ua-netinst/raw/master/example.gif "Navit on Raspberry Pi")
 
